@@ -1,0 +1,28 @@
+How to use U-BOOT on SeeedStudio NPI-IMX6ULL Single Board Computer
+------------------------------------------------------------------
+
+- Configure and build U-Boot for NPI-IMX6ULL:
+
+    $ export ARCH=arm
+    $ export CROSS_COMPILE=arm-none-linux-gnueabihf-
+    $ make seeed_npi_imx6ull_defconfig
+    $ make
+
+This will generate SPL and u-boot-dtb.img images.
+
+Boot from MMC/SD:
+- The SPL and u-boot-dtb.img images need to be flashed into the micro SD card:
+
+    $ sudo dd if=SPL of=/dev/mmcblk0 bs=1k seek=1; sync
+    $ sudo dd if=u-boot-dtb.img of=/dev/mmcblk0 bs=1k seek=69; sync
+
+- Boot mode settings:
+
+  Boot switch position: SW1 -> 0
+			SW2 -> 1
+			SW3 -> 0
+			SW4 -> 0
+			SW5 -> 1
+			SW6 -> 0
+			SW7 -> 0
+			SW8 -> 1
